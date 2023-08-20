@@ -1,10 +1,13 @@
 const router = require('express').Router();
 
-router.post('/register', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers',
-        'Content-Type, Authorization');
+router.post('/register', async (req, res) => {
+
+    const { username, email, password, repeatPassword } = req.body;
+    const token = await authService.register(username, email, password, repeatPassword);
+
+    res.cookie('auth', token);
+
+
 
 
 });
