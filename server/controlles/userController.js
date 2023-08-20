@@ -1,20 +1,20 @@
 const router = require('express').Router();
+const userManager= require('../managers/userManager');
 
 router.post('/register', async (req, res) => {
 
-    const { username, email, password, repeatPassword } = req.body;
-    const token = await authService.register(username,password, repeatPassword);
-
-    res.cookie('auth', token);
-
-
-
+    const { email, password } = req.body;
+    const token = await userManager.register(email,password);
 
 });
 
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const result = await userManager.login(email,password);
 
+    res.json(result);
+    
 });
 
 router.get('/logout', (req, res) => {

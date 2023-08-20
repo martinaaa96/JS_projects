@@ -3,39 +3,40 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 const User = require('../models/User');
 
+
 const SECRET = 'Somesecretsecret';
 
-exports.login = async (username, password) => {
-    const user = await User.find({ username });
+exports.login = async (email, password) => {
+    const user = await User.find({ email });
 
     if (!user) {
-        throw new Error('Invalid username or password');
+        throw new Error('Invalid email or password');
 
     }
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
-        throw new Error('Invalid username or password');
+        throw new Error('Invalid email or password');
     }
 
     const payload = {
         _id: user._id,
-        username: user.username,
+        email: user.email,
 
     }
     const token = await jwt.sign(payload, SECRET);
 
-    return token;
-
-}
-
-
-exports.register = async (username, password, repeatPassword) => {
-    if (password !== repeatPassword) {
-        throw new Error('Password missmatch');
+    return{
+        _id:user._id,
+        email: user.email,
+        accessToken:token
 
     }
-    const existingUser = await User.findOne({ username });
+
+}
+exports.register = async (email, password) => {
+ 
+    const existingUser = await User.findOne({ email });
 
 
     if (existingUser) {
@@ -47,7 +48,7 @@ exports.register = async (username, password, repeatPassword) => {
 
     }
     const hashedPassword = await bcrypt.hash(password, 10)
-    await User.create({ username, password: hashedPassword });
+    await User.create({ email, password: hashedPassword });
 
     return this.login(email, password);
 
