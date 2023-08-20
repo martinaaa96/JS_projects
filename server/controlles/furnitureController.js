@@ -13,13 +13,13 @@ router.get('/:furnitureId',async (req,res)=>{
     const furniture = await furnitureManager.getOne(req.params.furnitureId);
 
     res.json(furniture);
-    
+
 });
 
 router.post('/', async (req, res) => {
     const furnitureData = req.body;
 
-    await furnitureManager.create(furnitureData);
+    await furnitureManager.create(req.user._id, furnitureData);
 
     res.json({ _id: furnitureData._id });
 
