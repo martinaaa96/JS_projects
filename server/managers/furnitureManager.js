@@ -1,7 +1,10 @@
 const Furniture = require('../models/Furniture');
 
-exports.getAll = ()=> Furniture.find({});
+exports.getAll = () => Furniture.find({});
 
-exports.create = (ownerId,furnitureData) => Furniture.create({...furnitureData, owner: ownerId});
+exports.create = (ownerId, furnitureData) => Furniture.create({ ...furnitureData, _ownerId: ownerId });
 
-exports.getOne = (id)=> Furniture.findById(id);
+exports.getOne = (id) => Furniture.findById(id);
+
+
+exports.delete = (id) => Furniture.findByIdAndDelete(id);

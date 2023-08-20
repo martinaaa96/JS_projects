@@ -2,14 +2,14 @@ const router = require('express').Router();
 
 const furnitureManager = require('../managers/furnitureManager');
 
-router.get('/',async (req, res) => {
+router.get('/', async (req, res) => {
     const furnitures = await furnitureManager.getAll();
 
     res.json(furnitures);
 
 });
 
-router.get('/:furnitureId',async (req,res)=>{
+router.get('/:furnitureId', async (req, res) => {
     const furniture = await furnitureManager.getOne(req.params.furnitureId);
 
     res.json(furniture);
@@ -24,5 +24,9 @@ router.post('/', async (req, res) => {
     res.json({ _id: furnitureData._id });
 
 });
+router.delete('/:furnitureId', async (req, res) => {
+    const furniture = await furnitureManager.delete(req.params.furnitureId);
+    res.json({ _id: furniture._id });
 
+})
 module.exports = router;

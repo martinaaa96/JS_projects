@@ -2,22 +2,22 @@ const jwt = require('../lib/jsonwebtoken');
 
 const SECRET = 'Somesecretsecret';
 
-exports.authentication = async (req, res, next) => {
+exports.authentication = () => async (req, res, next) => {
 
-    const token = req.headers['X-Authorization'];
-    
+    const token = req.header('X-Authorization');
+
     if (token) {
         try {
             const decodedToken = await jwt.verify(token, SECRET);
-            
+
             req.user = decodedToken;
-       
+
             res.locals.user = decodedToken;
 
         } catch (error) {
 
-         
-            return res.status(401).json({ok: false});
+
+            return res.status(401).json({ ok: false });
         }
     }
 
@@ -30,6 +30,6 @@ exports.isAuth = (req, res, next) => {
         return res.redirect('/login');
 
     }
- next();
-    
+    next();
+
 }
