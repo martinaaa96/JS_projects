@@ -7,7 +7,7 @@ const User = require('../models/User');
 const SECRET = 'Somesecretsecret';
 
 exports.login = async (email, password) => {
-    const user = await User.find({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
         throw new Error('Invalid email or password');

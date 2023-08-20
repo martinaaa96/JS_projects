@@ -4,8 +4,9 @@ const userManager= require('../managers/userManager');
 router.post('/register', async (req, res) => {
 
     const { email, password } = req.body;
-    const token = await userManager.register(email,password);
+    const result = await userManager.register(email,password);
 
+    res.json(result);
 });
 
 
@@ -14,7 +15,7 @@ router.post('/login', async (req, res) => {
     const result = await userManager.login(email,password);
 
     res.json(result);
-    
+
 });
 
 router.get('/logout', (req, res) => {
