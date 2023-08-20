@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const jwt = require('../lib/jsonwebtoken');
+const SECRET = 'Somesecretsecret';
 
 exports.login = async (email, password) => {
     const user = await this.findByEmail(email);
