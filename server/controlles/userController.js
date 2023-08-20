@@ -3,7 +3,7 @@ const router = require('express').Router();
 router.post('/register', async (req, res) => {
 
     const { username, email, password, repeatPassword } = req.body;
-    const token = await authService.register(username, email, password, repeatPassword);
+    const token = await authService.register(username,password, repeatPassword);
 
     res.cookie('auth', token);
 
