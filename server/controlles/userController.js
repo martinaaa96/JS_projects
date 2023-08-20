@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const userManager= require('../managers/userManager');
+const userManager = require('../managers/userManager');
 
 router.post('/register', async (req, res) => {
 
     const { email, password } = req.body;
-    const result = await userManager.register(email,password);
+    const result = await userManager.register(email, password);
 
     res.json(result);
 });
@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    const result = await userManager.login(email,password);
+    const result = await userManager.login(email, password);
 
     res.json(result);
 
@@ -20,8 +20,8 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
 
-    res.json({ok: true});
-    
+    res.json({ ok: true });
+
 });
 
 module.exports = router;
