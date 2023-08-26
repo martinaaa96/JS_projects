@@ -25,8 +25,11 @@ router.post('/', async (req, res) => {
 
 });
 router.delete('/:furnitureId', async (req, res) => {
-    const furniture = await furnitureManager.delete(req.params.furnitureId);
-    res.json({ _id: furniture._id });
+    
+  await furnitureManager.delete(req.params.furnitureId);
 
-})
+    res.json({ ok: true });
+
+});
+
 module.exports = router;
