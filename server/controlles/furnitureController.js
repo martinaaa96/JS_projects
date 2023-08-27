@@ -3,7 +3,16 @@ const router = require('express').Router();
 const furnitureManager = require('../managers/furnitureManager');
 
 router.get('/', async (req, res) => {
-    const furnitures = await furnitureManager.getAll();
+   let ownerId = '';
+
+   if(req.query.where){
+    ownerId = req.query.where.split('=')[1].slice(1,-1);
+
+   }
+
+
+
+    const furnitures = await furnitureManager.getAll(ownerId);
 
     res.json(furnitures);
 

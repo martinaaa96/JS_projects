@@ -1,6 +1,13 @@
 const Furniture = require('../models/Furniture');
 
-exports.getAll = () => Furniture.find({});
+exports.getAll = (ownerId) => {
+let filter = {};
+if(ownerId){
+    filter._ownerId = ownerId;
+
+}
+    return Furniture.find(filter);
+}
 
 exports.create = (ownerId, furnitureData) => Furniture.create({ ...furnitureData, _ownerId: ownerId });
 
