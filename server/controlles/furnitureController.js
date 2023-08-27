@@ -24,9 +24,16 @@ router.post('/', async (req, res) => {
     res.json({ _id: furnitureData._id });
 
 });
+
+router.put('/:furnitureId', async (req, res) => {
+    const furnitureData = req.body;
+
+    await furnitureManager.update(req.params.furnitureId, furnitureData);
+    res.json({ ok: true });
+})
 router.delete('/:furnitureId', async (req, res) => {
-    
-  await furnitureManager.delete(req.params.furnitureId);
+
+    await furnitureManager.delete(req.params.furnitureId);
 
     res.json({ ok: true });
 

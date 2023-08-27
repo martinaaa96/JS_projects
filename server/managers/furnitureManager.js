@@ -6,5 +6,7 @@ exports.create = (ownerId, furnitureData) => Furniture.create({ ...furnitureData
 
 exports.getOne = (id) => Furniture.findById(id);
 
+exports.update = (id, furnitureData) => Furniture.findByIdAndUpdate(id, furnitureData);
+
 
 exports.delete = (id) => Furniture.findByIdAndDelete(id);

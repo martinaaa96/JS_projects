@@ -27,7 +27,7 @@ export async function createRecord(data) {
 }
 
 export async function editRecord(id, data) {
-    return await api.put(host + '/furnitures' + id, data);
+    return await api.put(host + '/furnitures/' + id, data);
 }
 
 export async function deleteRecord(id) {
